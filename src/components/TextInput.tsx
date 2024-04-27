@@ -1,5 +1,5 @@
+'use client';
 import React from 'react';
-
 
 type OnChangeProps = (value: string) => void;;
 type OnFocusProps = (value: boolean) => void;
