@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* font */
+@import url(./font.css);
+
+:root {
+    --easeOutQuart: cubic-bezier(0.25, 1, 0.5, 1);
+    --primary-background-color: #09090b;
+    --primary-text-color: #fff;
+    --scrollbar-color-track: #424242;
+    --scrollbar-color-thumb: #686868;
+    --basicQuart: cubic-bezier(0, 0, 0.2, 1);
+    --easeOutQuart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        
+    }
+}
+
+body {
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+}
+
+@supports (scrollbar-width: auto)
+{
+    * {
+        scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+    }
+}
+
+/*
+    ---------
+    커스텀 css class는 이니셜을 앞에 붙이기
+    ---------
+*/
+
+/* 폰트 관련 커스텀 스타일 */
+@layer base {
+    h1 {
+        @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl;
+        @apply leading-tight;
+    }
+    h2 {
+        @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl;
+        @apply leading-tight;
+    }
+    h3 {
+        @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl;
+        @apply leading-tight;
+    }
+    h4 {
+        @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl;
+        @apply leading-tight;
+    }
+    h5 {
+        @apply text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-3xl;
+        @apply leading-tight;
+    }
+    h6 {
+        @apply text-base sm:text-lg md:text-xl lg:text-2xl xl:text-2xl;
+        @apply leading-tight;
+    }
+    p {
+        @apply text-xs md:text-sm xl:text-base;
+        @apply leading-tight;
+    }
+}
+
+
+/* 애니메이션 */
+@layer utilities {
+    .jhs-scroll-animation-fade-up {
+        @apply opacity-0;
+        @apply translate-y-4;
+        transition: opacity cubic-bezier(.33,1,.68,1) .6s, transform cubic-bezier(.33,1,.68,1) .8s;
+    }
+    .jhs-scroll-animation-fade-up-visible {
+        @apply opacity-100;
+        @apply translate-y-0;
+    }
+}
+
+/* 미분류 커스텀 CSS */
+@layer utilities {
+    .jhs-bg-gradient-to-r-glitter {
+        background: linear-gradient(to right,transparent 35%,rgba(255,255,255,.3) 70%,transparent 100%);
+    }
+    .jhs-acrylic-box {
+        @apply relative;
+        @apply border;
+        @apply rounded-lg;
+        @apply border-slate-50/10;
+        @apply bg-slate-50/5;
+        @apply after:absolute;
+        @apply after:h-px;
+        @apply after:top-0;
+        @apply after:w-full;
+        @apply after:jhs-bg-gradient-to-r-glitter;
+    }
+    .jhs-header-prefix-box {
+        @apply relative;
+        @apply w-[24px] sm:w-[30px];
+        @apply aspect-[30/24];
+        @apply mr-1;
+    }
+    .jhs-container-padding {
+        @apply px-4 md:px-6 lg:px-8 py-6 md:py-8 lg:py-10;
+    }
+    .transition-text-input-label {
+        transition: color 200ms var(--basicQuart) 0ms, transform 200ms var(--basicQuart) 0ms, max-width 200ms var(--basicQuart) 0ms
+    }
+    .transition-text-input-legend {
+        transition: max-width 50ms var(--basicQuart) 0ms;
+    }
+}
