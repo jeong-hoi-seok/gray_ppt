@@ -80,7 +80,7 @@ const TextInput = (props: ITextInputProps) => {
             <label
                 className={[
                     "absolute z-[1] inset-0 h-fit overflow-hidden whitespace-nowrap text-ellipsis pointer-events-none select-none scale-100 transition-text-input-label origin-top-left translate-x-[13px]",
-                    isFocus ? 'text-yellow-300' : 'text-slate-500',
+                    isFocus ? 'text-yellow-300' : 'text-slate-400',
                     isUsed ? 'max-w-[calc(133%-32px)] translate-y-[-9px] scale-75' : `max-w-[calc(100%-24px)] translate-y-3 scale-100`
                 ].join(' ')}
             >
@@ -109,8 +109,8 @@ const TextInput = (props: ITextInputProps) => {
                 <fieldset
                     className={[
                         "absolute inset-0 -top-[5px] px-2 border border-solid rounded-[inherit] pointer-events-none overflow-hidden",
-                        isFocus ? 'border-yellow-300' : 'border-slate-500',
-                        !isUsed && 'border-slate-500',
+                        isFocus ? 'border-yellow-300' : 'border-slate-300',
+                        !isUsed && 'border-slate-300',
                     ].join(' ')}>
                     <legend
                         className={[
