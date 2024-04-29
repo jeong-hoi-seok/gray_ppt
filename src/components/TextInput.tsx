@@ -94,6 +94,7 @@ const TextInput = (props: ITextInputProps) => {
                         isUsed ? 'opacity-1' : 'opacity-0',
                     ].join(' ')}
                     autoComplete='off'
+                    value={inputValue}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     onChange={handleInput}
