@@ -16,7 +16,7 @@ const Home = () => {
     const [chatList, setChatList] = React.useState<IChatProps[]>([]);
 
 
-    const submitEvent = async (value: string) => {
+    const gptCallEvent = async (value: string) => {
         try {
             const res = await axios.post('/api/gpt', {
                 message: value
@@ -32,7 +32,7 @@ const Home = () => {
         }
     }
 
-    const gptCallEvent = async () => {
+    const submitEvent = async () => {
         try {
             //reset
             setChatList(prev => {
@@ -42,7 +42,7 @@ const Home = () => {
                 }];
             });
 
-            const chat = await submitEvent(message);
+            const chat = await gptCallEvent(message);
             
             setChatList(prev => {
                 return [...prev, {
@@ -58,7 +58,18 @@ const Home = () => {
     }
 
     React.useEffect(() => {
-
+        gptCallEvent('intro')
+        .then((chat) => {
+            setChatList(prev => {
+                return [...prev, {
+                    message: chat,
+                    target: 'gpt'
+                }];
+            });
+        })
+        .catch((error) => {
+            console.error(error);
+        })
     }, []);
 
     return (
@@ -78,7 +89,7 @@ const Home = () => {
                         endAdornment={
                             <button
                                 type='button'
-                                onClick={gptCallEvent}
+                                onClick={submitEvent}
                             >
                                 전송
                             </button>
@@ -88,7 +99,7 @@ const Home = () => {
                         }}
                         onKeyUp={(e) => {
                             if(e.key === 'Enter' && message !== '') {
-                                gptCallEvent();
+                                submitEvent();
                             }
                         }}
                     />
@@ -98,8 +109,10 @@ const Home = () => {
             particle={170}
             MinSpeed={100}
             MaxSpeed={400}
-            particleMinSize={0.2}
-            particleMaxSize={0.7}
+            particleMinSize={1}
+            particleMaxSize={2}
+            particleRGB={"255.255.255"}
+            particleAlpha={0.5}
             className='fixed top-0 left-0 pointer-events-none block w-full h-full'
             style={{
                 zIndex: '-1',
