@@ -12,12 +12,14 @@ import TextInput from '@/components/TextInput';
 
 const Home = () => {
     //state
+    const [loading, setLoading] = React.useState(false);
     const [message, setMessage] = React.useState(''); //gpt 대화 value
     const [chatList, setChatList] = React.useState<IChatProps[]>([]);
 
-
+    //gpt message call
     const gptCallEvent = async (value: string) => {
         try {
+            setLoading(true);
             const res = await axios.post('/api/gpt', {
                 message: value
             });
@@ -30,8 +32,12 @@ const Home = () => {
             console.error(error);
             throw new Error('gpt call error');
         }
+        finally {
+            setLoading(false);
+        }
     }
 
+    //save message
     const submitEvent = async () => {
         try {
             //reset
@@ -79,6 +85,7 @@ const Home = () => {
                     <div className='flex-1 overflow-hidden'>
                         <ChatField
                             chatList={chatList}
+                            loading={loading}
                         />
                     </div>
                     <TextInput
@@ -86,6 +93,8 @@ const Home = () => {
                         label='메시지 입력'
                         placeholder='궁금한걸 물어보세요!'
                         value={message}
+                        disabled={loading}
+                        autoFocus={!loading}
                         endAdornment={
                             <button
                                 type='button'
@@ -111,8 +120,7 @@ const Home = () => {
             MaxSpeed={400}
             particleMinSize={1}
             particleMaxSize={2}
-            particleRGB={"255.255.255"}
-            particleAlpha={0.5}
+            particleAlpha={0.6}
             className='fixed top-0 left-0 pointer-events-none block w-full h-full'
             style={{
                 zIndex: '-1',

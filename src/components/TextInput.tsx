@@ -18,8 +18,10 @@ interface ITextInputProps extends Emits {
     name: string;
     type?: React.HTMLInputTypeAttribute;
     placeholder?: string;
+    autoFocus?: boolean;
     defaultValue?: string;
     value?: string;
+    disabled?: boolean;
     endAdornment?: React.ReactNode;
 }
 
@@ -29,6 +31,8 @@ const TextInput = (props: ITextInputProps) => {
         name,
         type = 'text',
         placeholder,
+        disabled,
+        autoFocus,
         defaultValue = '',
         value = '',
         endAdornment,
@@ -88,7 +92,7 @@ const TextInput = (props: ITextInputProps) => {
             </label>
             <div className="relative inline-flex items-center rounded-lg box-border overflow-hidden">
                 <input 
-                    {...{name, placeholder, type}}
+                    {...{name, placeholder, type, disabled, autoFocus}}
                     className={[
                         "flex-1 block w-full px-3 py-3 bg-transparent focus:outline-0 transition-opacity appearance-none outline-none",
                         isUsed ? 'opacity-1' : 'opacity-0',

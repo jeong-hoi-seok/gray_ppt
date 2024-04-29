@@ -7,11 +7,13 @@ export interface IChatProps {
 
 interface IChatFieldProps {
     chatList?: IChatProps[];
+    loading?: boolean;
 }
 
 const ChatField: React.FC<IChatFieldProps> = (props) => {
     const {
-        chatList
+        chatList,
+        loading,
     } = props;
 
     return (
@@ -29,9 +31,16 @@ const ChatField: React.FC<IChatFieldProps> = (props) => {
                                     <span>{chat.message}</span>
                                 </div>
                             </li>
-
                         )
                     })
+                }
+                {
+                    loading &&
+                    <li>
+                        <p>
+                            로딩중
+                        </p>
+                    </li>
                 }
             </ul>
         </div>

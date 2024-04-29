@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 
-const getRandom = (min: number, max: number) =>
+const getRandom = (min: number, max: number, round?: boolean) =>
 {
-    return Math.round(Math.random() * (max - min)) + min;
+    const ql = Math.random() * (max - min);
+    return round ? Math.round(ql) : ql;
 };
 
 interface IDustEffectProps extends React.CanvasHTMLAttributes<HTMLCanvasElement> {
@@ -72,9 +73,9 @@ const DustEffect = (props: IDustEffectProps) =>
             const speed = getRandom(this.minSpeed, this.maxSpeed);
             //init
             this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.x = getRandom(0, this.canvas.width);
-            this.y = getRandom(0, this.canvas.height);
-            this.alpha = getRandom(0, this.maxAlpha);
+            this.x = getRandom(0, this.canvas.width, false);
+            this.y = getRandom(0, this.canvas.height, false);
+            this.alpha = getRandom(0, this.maxAlpha, false);
             this.dx = Math.cos(angle) * speed;
             this.dy = Math.sin(angle) * speed;
             this.dalpha = 0.1;
