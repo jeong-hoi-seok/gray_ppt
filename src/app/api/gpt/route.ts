@@ -52,8 +52,8 @@ export const POST = async (req: Request) => {
                 { role: "assistant", content: "제 취미는 침대에서 뒹굴거리거나 영화보기를 좋아해요!" },
                 { role: "user", content: body.message },
             ],
-            model: "gpt-3.5-turbo",
-            max_tokens: 300,
+            model: "gpt-4-turbo",
+            max_tokens: 500,
         });
     
         return NextResponse.json(completion.choices[0]);
