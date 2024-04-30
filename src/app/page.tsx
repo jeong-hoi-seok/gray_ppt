@@ -30,6 +30,12 @@ const Home = () => {
             return gptMessage.content as string;
         } catch (error) {
             console.error(error);
+            setChatList(prev => {
+                return [...prev, {
+                    target: 'gpt',
+                    message: '죄송해요 gpt에 오류가 발생했어요. :( 다시 질문해 주세요.'
+                }]
+            });
             throw new Error('gpt call error');
         }
         finally {
