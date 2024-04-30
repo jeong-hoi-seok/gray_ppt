@@ -1,5 +1,7 @@
+'use client'
 import React from 'react';
 import Progress from './Progress';
+import TextEffect from './TextEffect';
 
 export interface IChatProps {
     message: string;
@@ -39,7 +41,15 @@ const ChatField: React.FC<IChatFieldProps> = (props) => {
                             >
                                 <div className={`w-[60%] flex ${chat.target === 'gpt' ? 'justify-start' : 'justify-end'}`}>
                                     <div className={`inline-block px-4 py-3 rounded-2xl ${chat.target === 'gpt' ? 'bg-zinc-800' : 'bg-yellow-300 text-zinc-800'}`}>
-                                        <p>{chat.message}</p>
+                                        {
+                                            chat.target === 'gpt' ?
+                                            <TextEffect
+                                                text={chat.message}
+                                                delay={10}
+                                            />
+                                            :
+                                            <p>{chat.message}</p>
+                                        }
                                     </div>
                                 </div>
                             </li>
