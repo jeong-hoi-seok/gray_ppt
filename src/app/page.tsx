@@ -94,7 +94,6 @@ const Home = () => {
                         placeholder='궁금한걸 물어보세요!'
                         value={message}
                         disabled={loading}
-                        autoFocus={!loading}
                         endAdornment={
                             <button
                                 type='button'

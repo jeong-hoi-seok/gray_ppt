@@ -18,7 +18,6 @@ interface ITextInputProps extends Emits {
     name: string;
     type?: React.HTMLInputTypeAttribute;
     placeholder?: string;
-    autoFocus?: boolean;
     defaultValue?: string;
     value?: string;
     disabled?: boolean;
@@ -32,7 +31,6 @@ const TextInput = (props: ITextInputProps) => {
         type = 'text',
         placeholder,
         disabled,
-        autoFocus,
         defaultValue = '',
         value = '',
         endAdornment,
@@ -41,6 +39,8 @@ const TextInput = (props: ITextInputProps) => {
         onKeyDown,
         onKeyUp
     } = props;
+    //ref
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
     //state
     const [inputValue, setInputValue] = React.useState(defaultValue || value);
     const [isFocus, setIsFocus] = React.useState(false);
@@ -79,6 +79,12 @@ const TextInput = (props: ITextInputProps) => {
         setIsUsed((isFocus || (!isFocus && inputValue.length > 0)));
     }, [inputValue, isFocus]);
 
+    React.useEffect(() => {
+        if (!disabled && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [disabled])
+
     return (
         <div className="relative inline-flex flex-col mt-2 mb-1">
             <label
@@ -92,7 +98,8 @@ const TextInput = (props: ITextInputProps) => {
             </label>
             <div className="relative inline-flex items-center rounded-lg box-border overflow-hidden">
                 <input 
-                    {...{name, placeholder, type, disabled, autoFocus}}
+                    {...{name, placeholder, type, disabled}}
+                    ref={inputRef}
                     className={[
                         "flex-1 block w-full px-3 py-3 bg-transparent focus:outline-0 transition-opacity appearance-none outline-none",
                         isUsed ? 'opacity-1' : 'opacity-0',
