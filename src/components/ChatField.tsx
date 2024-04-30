@@ -1,4 +1,5 @@
 import React from 'react';
+import Progress from './Progress';
 
 export interface IChatProps {
     message: string;
@@ -15,10 +16,19 @@ const ChatField: React.FC<IChatFieldProps> = (props) => {
         chatList,
         loading,
     } = props;
+    //ref
+    const scrollRef = React.useRef< HTMLUListElement | null>(null);
+
+    React.useEffect(() => {
+        const target = scrollRef.current;
+        if(target && chatList && chatList.length > 0) {
+            target.scrollTo(0, target.scrollHeight);
+        }
+    }, [chatList]);
 
     return (
         <div className='h-full py-2 overflow-hidden'>
-            <ul className='flex flex-col gap-4 h-full overflow-auto'>
+            <ul ref={scrollRef} className='flex flex-col gap-4 h-full overflow-auto'>
                 {
                     chatList &&
                     chatList.map((chat, index) => {
@@ -28,7 +38,7 @@ const ChatField: React.FC<IChatFieldProps> = (props) => {
                                 className={`flex ${chat.target === 'gpt' ? 'justify-start' : 'justify-end'}`}
                             >
                                 <div className={`px-4 py-2 rounded-2xl ${chat.target === 'gpt' ? 'bg-gray-700' : 'bg-yellow-300 text-gray-700'}`}>
-                                    <span>{chat.message}</span>
+                                    <p>{chat.message}</p>
                                 </div>
                             </li>
                         )
@@ -36,10 +46,8 @@ const ChatField: React.FC<IChatFieldProps> = (props) => {
                 }
                 {
                     loading &&
-                    <li>
-                        <p>
-                            로딩중
-                        </p>
+                    <li className='text-slate-400/[0.75]'>
+                        <Progress stroke={3} size={30}/>
                     </li>
                 }
             </ul>

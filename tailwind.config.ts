@@ -36,12 +36,23 @@ const config: Config = {
                     '0%': { opacity: '1' },
                     '100%': {  opacity: '0' },
                 },
+                'rotate': {
+                    '0%': { transform: 'rotate(0deg)' },
+                    '100%': { transform: 'rotate(360deg)' },
+                },
+                'progress': {
+                    '0%': { strokeDashoffset: 'var(--offset)' },
+                    '50%': { strokeDashoffset: '0' },
+                    '100%': { strokeDashoffset: 'var(--unoffset)' },
+                }
             },
             animation: {
                 'show-blur': 'show-blur 0.7s linear forwards',
                 'button-ripple': 'button-ripple 0.4s linear forwards',
                 'fade-in': 'fade-in 0.3s forwards',
                 'fade-out': 'fade-out 0.3s forwards',
+                'rotate': 'rotate 1.4s linear infinite',
+                'progress': 'progress 1.4s ease-in-out infinite'
             },
         },
     },

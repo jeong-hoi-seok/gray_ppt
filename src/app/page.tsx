@@ -56,10 +56,12 @@ const Home = () => {
                     target: 'gpt'
                 }];
             });
-            setMessage('');
             
         } catch (error) {
             console.error(error);
+        }
+        finally {
+            setMessage('');
         }
     }
 
@@ -99,7 +101,7 @@ const Home = () => {
                                 type='button'
                                 onClick={submitEvent}
                             >
-                                전송
+                                { loading ? '대기' : '전송' }
                             </button>
                         }
                         onChange={(v) => {
