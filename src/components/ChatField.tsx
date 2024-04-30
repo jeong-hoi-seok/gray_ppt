@@ -40,7 +40,7 @@ const ChatField: React.FC<IChatFieldProps> = (props) => {
                                 className={`flex ${chat.target === 'gpt' ? 'justify-start' : 'justify-end'}`}
                             >
                                 <div className={`w-[60%] flex ${chat.target === 'gpt' ? 'justify-start' : 'justify-end'}`}>
-                                    <div className={`inline-block px-4 py-3 rounded-2xl ${chat.target === 'gpt' ? 'bg-zinc-800' : 'bg-yellow-300 text-zinc-800'}`}>
+                                    <div className={`inline-block px-4 py-3 rounded-2xl ${chat.target === 'gpt' ? 'bg-zinc-800' : 'bg-green-400 text-zinc-800'}`}>
                                         {
                                             chat.target === 'gpt' ?
                                             <TextEffect
