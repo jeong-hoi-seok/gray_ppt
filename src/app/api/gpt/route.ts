@@ -25,7 +25,9 @@ export const POST = async (req: Request) => {
                 { role: "user", content: body.message },
             ],
             model: "gpt-4-turbo",
-            max_tokens: 500,
+            max_tokens: 650,
+            temperature: 0.9,
+
         });
     
         return NextResponse.json(completion.choices[0]);
